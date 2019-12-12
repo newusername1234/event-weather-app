@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.websiteName {
+    background-color: aqua;
+}
+
+.websiteDescription {
+    background-color: navajowhite;
+}
+
+.userInput {
+    color: palegreen;
+}
+
+.footerContainer {
+    background-color: orchid;
+}
