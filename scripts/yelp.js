@@ -1,12 +1,13 @@
 
 let cityName = "Pheonix"
 const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
+const newUrl = `http://bd526ce7.ngrok.io/${cityName}/${yelpapiKey}`
 const today = new Date();
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 
 function getYelpObj() {
-    // console.log(url);
-    fetch(url)
+    console.log(newUrl);
+    fetch(newUrl)
         .then(r => r.json())
         .then(r => r.map(createCard))
 }
