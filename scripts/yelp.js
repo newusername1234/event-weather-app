@@ -6,10 +6,10 @@ const today = new Date();
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 
 function getYelpObj() {
-    console.log(url);
+    // console.log(url);
     fetch(url)
         .then(r => r.json())
-        .then(r => console.log(r))
+        .then(r => r.map(createCard))
 }
 
 function createCard(obj) {
@@ -50,7 +50,7 @@ time_start: "2008-07-17T19:30:00-04:00",
 __proto__: Object,
 }
 
-createCard(obj);
+// createCard(obj);
 
 function extractImage(obj) {
     return obj["image_url"];
