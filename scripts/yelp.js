@@ -1,6 +1,6 @@
-// console.log(apiKey);
+// console.log(yelpapiKey);
 let cityName = "Pheonix"
-const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${apiKey}`
+const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
 const today = new Date();
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 
@@ -14,6 +14,7 @@ function getYelpObj() {
 function createCard(obj) {
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
+    newCard.className = "js-resultCard";
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
@@ -75,7 +76,7 @@ function extractDescription(obj) {
 
 function extractCost(obj) {
     if (obj.cost) {
-        return obj.cost;
+        return `Cost: ${obj.cost}`;
     } else {
         return "Unknown";
     }
