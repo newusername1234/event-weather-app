@@ -1,6 +1,7 @@
+
 // console.log(apiKey);
 let cityName = "Pheonix"
-const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${apiKey}`
+const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
 const today = new Date();
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 
@@ -14,12 +15,14 @@ function getYelpObj() {
 function createCard(obj) {
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
+    newCard.className = "js-resultCard";
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
     appendTextToCard(extractDate(obj), newCard, "li"); // adds date
-    appendTextToCard(extractLocation(obj), newCard, "li");
+    appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
+    findWeatherAndTempforDateGiven(getDateString(obj), newCard);
     resultContainer.appendChild(newCard);
 }
 
@@ -109,6 +112,11 @@ ${line2}`
     return location;
 }
 
+function getDateString(obj) {
+    let date = extractDate(obj);
+    date += " 18:00:00";
+    return date;
+}
 
 // used in extractLocation() since yelp data doesn't include state
 function convertZipcodeToState(zipcode) {
@@ -332,7 +340,7 @@ function convertZipcodeToState(zipcode) {
     return st;
 }
 
-console.log(extractLocation(obj))
+// console.log(extractLocation(obj))
 // console.log(extractDate(obj));
 
 
