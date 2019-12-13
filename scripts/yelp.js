@@ -1,4 +1,4 @@
-// console.log(yelpapiKey);
+
 let cityName = "Pheonix"
 const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
 const today = new Date();
@@ -20,7 +20,8 @@ function createCard(obj) {
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
     appendTextToCard(extractDate(obj), newCard, "li"); // adds date
-    appendTextToCard(extractLocation(obj), newCard, "li");
+    appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
+    findWeatherAndTempforDateGiven(getDateString(obj), newCard);
     resultContainer.appendChild(newCard);
 }
 
@@ -102,6 +103,11 @@ ${line2}`
     return location;
 }
 
+function getDateString(obj) {
+    let date = extractDate(obj);
+    date += " 18:00:00";
+    return date;
+}
 
 // used in extractLocation() since yelp data doesn't include state
 function convertZipcodeToState(zipcode) {
