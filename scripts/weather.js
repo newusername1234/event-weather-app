@@ -1,14 +1,15 @@
 let weatherAPIaddress = 'http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID=${`weatherAPIKey`}'
 
+
 const container = document.querySelector(".js-container");
 
-let dateGiven = "2019-12-15 12:00:00"
+// let dateGiven = "2019-12-15 12:00:00"
 
 function extractListforDateGiven() {
     return fetch(weatherAPIaddress)
     .then(r => r.json())
     .then(extractsList)
-    .then(showMeTHing)
+    // .then(showMeTHing)
 }
 
 function extractsList (obj) {
@@ -18,21 +19,21 @@ function extractsList (obj) {
 function kToF (k){
    return parseInt(((k-273.15) * (9/5)) + 32);
 }
-console.log(kToF(277.93))
+// console.log(kToF(277.93))
 
-function findWeatherAndTempforDateGiven (dateGiven) {   
+function findWeatherAndTempforDateGiven (dateGiven, newCard) {
     extractListforDateGiven()
     .then(x => {
         for (let item of x) {
             if (item.dt_txt == dateGiven) {
-                createAndAppendElement(item.weather[0].description);
-                createAndAppendElement(kToF(item.main.temp));
+                appendTextToCard(item.weather[0].description, newCard, "h3");
+                appendTextToCard(String(kToF(item.main.temp)), newCard, "h4");
             }
         }
     })  
 }
 
-findWeatherAndTempforDateGiven(dateGiven);
+// findWeatherAndTempforDateGiven(dateGiven);
 
 function createAndAppendElement(abc) {
     const h1 = document.createElement("h1");
