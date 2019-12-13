@@ -1,6 +1,6 @@
 // console.log(apiKey);
 let cityName = "Pheonix"
-const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${`yelpapiKey`}`
+const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
 const today = new Date();
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 
