@@ -1,17 +1,11 @@
-
-
-let cityName = "Pheonix"
-
-const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${`yelpapiKey`}`
-
-
 const today = new Date();
 let currentTime = parseInt(today.getTime()/1000);
 const fiveDaysMilliSeconds = 432000;
 let endTime = currentTime + fiveDaysMilliSeconds;
+// let userInput = document.getElementById("locationInput");
+// let cityName = userInput.textContent;
 let cityName = "Pheonix";
-// const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
-const newUrl = `http://bd526ce7.ngrok.io/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`
+const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 // console.log(newUrl);
 function getYelpObj() {
