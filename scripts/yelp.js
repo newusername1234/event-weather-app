@@ -2,16 +2,13 @@ const today = new Date();
 let currentTime = parseInt(today.getTime()/1000);
 const fiveDaysMilliSeconds = 432000;
 let endTime = currentTime + fiveDaysMilliSeconds;
-// let userInput = document.getElementById("locationInput");
-// let cityName = userInput.textContent;
-let cityName = "Pheonix";
-const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`
+// let cityName = "Pheonix";
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
-// console.log(newUrl);
-function getYelpObj() {
-    console.log(newUrl);
+function getYelpObj(newUrl) {
+    console.log(newUrl)
     fetch(newUrl)
         .then(r => r.json())
+        // .then(r => console.log(r))
         .then(r => r.map(createCard))
 }
 
@@ -52,8 +49,6 @@ time_end: "2008-07-17T21:30:00-04:00",
 time_start: "2008-07-17T19:30:00-04:00",
 __proto__: Object,
 }
-
-// createCard(obj);
 
 function extractImage(obj) {
     return obj["image_url"];
@@ -100,6 +95,13 @@ function extractDate(obj) {
     }
 }
 
+function extractTime(obj) {
+    let time = obj.time_start;
+    time = time.slice(11, 19);
+    // console.log(time);
+    return time;
+}
+
 function extractLocation(obj) {
     let objLocation = obj.location;
     let state = convertZipcodeToState(objLocation.zip_code);
@@ -112,7 +114,25 @@ ${line2}`
 
 function getDateString(obj) {
     let date = extractDate(obj);
-    date += " 18:00:00";
+    let hours = extractTime(obj)
+    // console.log(hours);
+    if (hours < "03:00:00") {
+        date += " 03:00:00";
+    } else if (hours < "06:00:00") {
+        date += " 06:00:00";
+    } else if (hours < "09:00:00") {
+        date += " 09:00:00";
+    } else if (hours < "12:00:00") {
+        date += " 12:00:00";
+    } else if (hours < "15:00:00") {
+        date += " 15:00:00";
+    } else if (hours < "18:00:00") {
+        date += " 18:00:00";
+    } else if (hours < "21:00:00") {
+        date += " 21:00:00";
+    } else if (hours < "24:00:00") {
+        date += " 24:00:00";
+    }
     return date;
 }
 
