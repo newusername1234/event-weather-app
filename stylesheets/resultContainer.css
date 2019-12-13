@@ -1,0 +1,23 @@
+.js-resultContainer {
+    display: flex;
+}
+
+.js-resultCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 500px;
+    min-width: 300px;
+    border: black 1px solid;
+    text-align: center;
+}
+
+.js-pictureFrame {
+    display: flex;
+    justify-content: center;
+    height: 30%;
+}
+
+.js-pictureFrame img {
+    height: 100%;
+}
