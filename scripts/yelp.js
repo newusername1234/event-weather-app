@@ -84,7 +84,7 @@ function extractDescription(obj) {
 
 function extractCost(obj) {
     if (obj.cost) {
-        return `Cost: ${obj.cost}`;
+        return `Cost: $${obj.cost}`;
     } else {
         return "Cost: Unknown";
     }
