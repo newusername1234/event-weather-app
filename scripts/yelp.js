@@ -1,10 +1,13 @@
 
-let cityName = "Pheonix"
-const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
-const newUrl = `http://bd526ce7.ngrok.io/${cityName}/${yelpapiKey}`
 const today = new Date();
+let currentTime = parseInt(today.getTime()/1000);
+const fiveDaysMilliSeconds = 432000;
+let endTime = currentTime + fiveDaysMilliSeconds;
+let cityName = "Pheonix";
+// const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
+const newUrl = `http://bd526ce7.ngrok.io/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
-
+// console.log(newUrl);
 function getYelpObj() {
     console.log(newUrl);
     fetch(newUrl)
@@ -50,7 +53,7 @@ time_start: "2008-07-17T19:30:00-04:00",
 __proto__: Object,
 }
 
-createCard(obj);
+// createCard(obj);
 
 function extractImage(obj) {
     return obj["image_url"];
@@ -83,7 +86,7 @@ function extractCost(obj) {
     if (obj.cost) {
         return `Cost: ${obj.cost}`;
     } else {
-        return "Unknown";
+        return "Cost: Unknown";
     }
 }
 
