@@ -49,16 +49,19 @@ time_start: "2008-07-17T19:30:00-04:00",
 __proto__: Object,
 }
 
-// createCard(obj);
+createCard(obj);
 
 function extractImage(obj) {
     return obj["image_url"];
 }
 
 function appendImagetoCard(str, newCard) {
+    let pictureFrame = document.createElement("div");
+    pictureFrame.className = "js-pictureFrame";
     let imgEl = document.createElement("img");
     imgEl.src = str;
-    newCard.appendChild(imgEl);
+    pictureFrame.appendChild(imgEl);
+    newCard.appendChild(pictureFrame);
 }
 
 function extractName(obj) {
