@@ -1,7 +1,8 @@
 * {
-    border:black 1px solid;
+    /* border:black 1px solid; */
     box-sizing: border-box;
-    font-family: Arial;
+    font-style: bold;
+    font-family: 'Rubik', sans-serif;
 }
 
 
@@ -11,13 +12,17 @@ html, body {
     width: 100%;
 }
 
+html {
+
+}
+
 body {
+    background-image: url(../images/scenic-view-of-mountain-range-564902.jpg) ;
     display: flex;
     flex-direction: column;
     justify-content: space-between ;
     align-items: center;
     background-size: 100% 100%;
-    background-image: url(../images/scenic-view-of-mountain-range-564902.jpg) ;
 }
 
 .nameAndDescription {
@@ -27,10 +32,12 @@ body {
 }
 
 .websiteName {
+    color: rgb(194, 73, 102);
     display: flex;
     /* justify-content: center; */
     font-size: 70px;
     padding-top: 20px;
+    text-shadow: 2px 2px rgb(4, 2, 2);
 }
 
 .websiteDescription {
@@ -38,24 +45,34 @@ body {
     /* flex-direction: column;
     align-items: center; */
     font-size: 30px;
-    color: darkgray;
+    color: rgb(139, 130, 130);
     /* padding: 20px; */
     padding-left: 100px;
     padding-right: 100px;
+    padding-top: 30px;
     align-items: center;
+    text-shadow: 2px 2px black;
 }
 
-/* .js-resultContainer {
-    border: solid 1px red;
-} */
-
-/* .userInput {
-    color: palegreen;
-} */
+.userInput {
+    padding: 30px;
+    padding-top: 50px;
+    color: rgb(139, 130, 130);
+    text-shadow: 1px 1px black;
+    font-size: 25px;
+}
 
 .footerContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: left;
+    align-items: right ;
+    color: rgb(82, 75, 75);
+    text-shadow: 1px 1px black;
+}
+
+.partners {
+    display: flex;
+    justify-content: right;
+    align-items: flex-start;
 }
