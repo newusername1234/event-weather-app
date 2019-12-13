@@ -1,17 +1,16 @@
-
-let cityName = "Pheonix"
-
-const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
-
-
-const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${`yelpapiKey`}`
-
 const today = new Date();
+let currentTime = parseInt(today.getTime()/1000);
+const fiveDaysMilliSeconds = 432000;
+let endTime = currentTime + fiveDaysMilliSeconds;
+// let userInput = document.getElementById("locationInput");
+// let cityName = userInput.textContent;
+let cityName = "Pheonix";
+const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
-
+// console.log(newUrl);
 function getYelpObj() {
-    // console.log(url);
-    fetch(url)
+    console.log(newUrl);
+    fetch(newUrl)
         .then(r => r.json())
         .then(r => r.map(createCard))
 }
@@ -61,9 +60,12 @@ function extractImage(obj) {
 }
 
 function appendImagetoCard(str, newCard) {
+    let pictureFrame = document.createElement("div");
+    pictureFrame.className = "js-pictureFrame";
     let imgEl = document.createElement("img");
     imgEl.src = str;
-    newCard.appendChild(imgEl);
+    pictureFrame.appendChild(imgEl);
+    newCard.appendChild(pictureFrame);
 }
 
 function extractName(obj) {
@@ -82,9 +84,9 @@ function extractDescription(obj) {
 
 function extractCost(obj) {
     if (obj.cost) {
-        return `Cost: ${obj.cost}`;
+        return `Cost: $${obj.cost}`;
     } else {
-        return "Unknown";
+        return "Cost: Unknown";
     }
 }
 
