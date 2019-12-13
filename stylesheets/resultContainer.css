@@ -1,0 +1,43 @@
+.js-resultContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.js-resultCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 500px;
+    width: 300px;
+    border: black 1px solid;
+    text-align: center;
+}
+
+.js-pictureFrame {
+    display: flex;
+    justify-content: center;
+    height: 30%;
+}
+
+.js-pictureFrame img {
+    height: 100%;
+}
+
+.js-resultCard h1 {
+    margin: 0;
+    padding: 20px, 0;
+}
+
+.js-resultCard p {
+    margin: 5px;
+    padding: 20px, 5px;
+}
+
+.js-resultCard li {
+    list-style: circle;
+    text-align: center;
+}
+
+.js-resultCard h3 {
+    text-emphasis: none;
+}
