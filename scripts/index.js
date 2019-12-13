@@ -1,13 +1,11 @@
-// TODO: Create a submit button
-// TODO: Add event listener to submit button
-// TODO: Create function to make getYelpObj a call
+// DONE: Create a submit button
+// DONE: Add event listener to submit button
+// DONE: Create function to make getYelpObj a call
 // TODO: Update weather function to call only the next 3 hour increment
+// TODO: 
 
-
-
-
-// getYelpObj();
 createButton();
+// creates submit button for html
 
 function createButton() {
     let inputContainer = document.querySelector(".userInput");
