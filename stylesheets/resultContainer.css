@@ -9,14 +9,22 @@
     justify-content: flex-start;
     height: 500px;
     width: 300px;
-    border: black 1px solid;
+    border: black 5px solid;
+    border-radius: 10px;
     text-align: center;
+    margin: 15px;
+    box-shadow: 10px 10px 10px rgb(95, 95, 214, .5);
 }
 
 .js-pictureFrame {
     display: flex;
     justify-content: center;
     height: 30%;
+    padding: 10px;
+}
+
+.js-pictureFrame > img {
+    border-radius: 30px;
 }
 
 .js-pictureFrame img {
