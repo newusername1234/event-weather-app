@@ -2,14 +2,10 @@ const today = new Date();
 let currentTime = parseInt(today.getTime()/1000);
 const fiveDaysMilliSeconds = 432000;
 let endTime = currentTime + fiveDaysMilliSeconds;
-// let userInput = document.getElementById("locationInput");
-// let cityName = userInput.textContent;
-let cityName = "Pheonix";
-const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`
+// let cityName = "Pheonix";
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
-// console.log(newUrl);
-function getYelpObj() {
-    console.log(newUrl);
+function getYelpObj(newUrl) {
+    console.log(newUrl)
     fetch(newUrl)
         .then(r => r.json())
         .then(r => r.map(createCard))
@@ -52,8 +48,6 @@ time_end: "2008-07-17T21:30:00-04:00",
 time_start: "2008-07-17T19:30:00-04:00",
 __proto__: Object,
 }
-
-// createCard(obj);
 
 function extractImage(obj) {
     return obj["image_url"];
