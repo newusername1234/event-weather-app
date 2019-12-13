@@ -69,17 +69,9 @@ function appendTextToCard(str, newCard, type) {
     newCard.appendChild(typeThing);
 }
 
-function appendIDToCard(str, newCard) {
-    let h1 = document.createElement("h1");
-    h1.textContent = str;
-    newCard.appendChild(newCard);
-}
-
 function extractDescription(obj) {
     return obj.description
 }
-
-function appendDescriptionToCard(str, newCard) {}
 
 function extractCost(obj) {
     if (obj.cost) {
@@ -331,9 +323,6 @@ function convertZipcodeToState(zipcode) {
 
     return st;
 }
-
-console.log(extractLocation(obj))
-// console.log(extractDate(obj));
 
 
 
