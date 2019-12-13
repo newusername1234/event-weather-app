@@ -1,4 +1,4 @@
-let weatherAPIaddress = 'http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID=${weatherAPIKey}'
+let weatherAPIaddress = 'http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID=${`weatherAPIKey`}'
 
 const container = document.querySelector(".js-container");
 
