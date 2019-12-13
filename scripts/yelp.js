@@ -1,25 +1,32 @@
-// console.log(apiKey);
+
 let cityName = "Pheonix"
+
 const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
+
+
+const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${`yelpapiKey`}`
+
 const today = new Date();
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 
 function getYelpObj() {
-    console.log(url);
+    // console.log(url);
     fetch(url)
         .then(r => r.json())
-        .then(r => console.log(r))
+        .then(r => r.map(createCard))
 }
 
 function createCard(obj) {
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
+    newCard.className = "js-resultCard";
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
     appendTextToCard(extractDate(obj), newCard, "li"); // adds date
-    appendTextToCard(extractLocation(obj), newCard, "li");
+    appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
+    findWeatherAndTempforDateGiven(getDateString(obj), newCard);
     resultContainer.appendChild(newCard);
 }
 
@@ -47,7 +54,7 @@ time_start: "2008-07-17T19:30:00-04:00",
 __proto__: Object,
 }
 
-createCard(obj);
+// createCard(obj);
 
 function extractImage(obj) {
     return obj["image_url"];
@@ -69,21 +76,13 @@ function appendTextToCard(str, newCard, type) {
     newCard.appendChild(typeThing);
 }
 
-function appendIDToCard(str, newCard) {
-    let h1 = document.createElement("h1");
-    h1.textContent = str;
-    newCard.appendChild(newCard);
-}
-
 function extractDescription(obj) {
     return obj.description
 }
 
-function appendDescriptionToCard(str, newCard) {}
-
 function extractCost(obj) {
     if (obj.cost) {
-        return obj.cost;
+        return `Cost: ${obj.cost}`;
     } else {
         return "Unknown";
     }
@@ -109,6 +108,11 @@ ${line2}`
     return location;
 }
 
+function getDateString(obj) {
+    let date = extractDate(obj);
+    date += " 18:00:00";
+    return date;
+}
 
 // used in extractLocation() since yelp data doesn't include state
 function convertZipcodeToState(zipcode) {
@@ -331,9 +335,6 @@ function convertZipcodeToState(zipcode) {
 
     return st;
 }
-
-console.log(extractLocation(obj))
-// console.log(extractDate(obj));
 
 
 
