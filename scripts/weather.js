@@ -1,15 +1,17 @@
-let weatherAPIaddress = `http://api.openweathermap.org/data/2.5/forecast?q=Atlanta&APPID=${weatherAPIKey}`
 
 
-const container = document.querySelector(".js-container");
+// const container = document.querySelector(".js-container");
 
 // let dateGiven = "2019-12-15 12:00:00"
 
 function extractListforDateGiven() {
+    let userInput = document.getElementById("locationInput");
+    let cityName = userInput.value;
+    let weatherAPIaddress = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=${weatherAPIKey}`;
     return fetch(weatherAPIaddress)
     .then(r => r.json())
     .then(extractsList)
-    .then(showMeTHing)
+    // .then(showMeTHing)
 }
 
 function extractsList (obj) {
@@ -35,12 +37,12 @@ function findWeatherAndTempforDateGiven (dateGiven, newCard) {
 
 // findWeatherAndTempforDateGiven(dateGiven);
 
-function createAndAppendElement(abc) {
-    const h1 = document.createElement("h1");
-    h1.textContent = abc;
-    container.appendChild(h1);
-    return h1;
-}
+// function createAndAppendElement(abc) {
+//     const h1 = document.createElement("h1");
+//     h1.textContent = abc;
+//     container.appendChild(h1);
+//     return h1;
+// }
 
 function showMeTHing(thing) {
     console.log(thing);

@@ -18,10 +18,10 @@ function createButton() {
 function submitYelpCall() {
     let userInput = document.getElementById("locationInput");
     let cityName = userInput.value
-    const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`
+    const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`;
     console.log("clicked")
-    console.log(cityName)
-    console.log(newUrl)
+    // console.log(cityName)
+    // console.log(newUrl)
     clearResultContainer();
     getYelpObj(newUrl);
 }
