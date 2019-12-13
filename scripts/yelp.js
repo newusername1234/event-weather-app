@@ -1,4 +1,10 @@
 
+
+let cityName = "Pheonix"
+
+const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${`yelpapiKey`}`
+
+
 const today = new Date();
 let currentTime = parseInt(today.getTime()/1000);
 const fiveDaysMilliSeconds = 432000;
