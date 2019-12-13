@@ -1,5 +1,4 @@
 
-// console.log(apiKey);
 let cityName = "Pheonix"
 const url = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}`
 const today = new Date();
@@ -72,21 +71,13 @@ function appendTextToCard(str, newCard, type) {
     newCard.appendChild(typeThing);
 }
 
-function appendIDToCard(str, newCard) {
-    let h1 = document.createElement("h1");
-    h1.textContent = str;
-    newCard.appendChild(newCard);
-}
-
 function extractDescription(obj) {
     return obj.description
 }
 
-function appendDescriptionToCard(str, newCard) {}
-
 function extractCost(obj) {
     if (obj.cost) {
-        return obj.cost;
+        return `Cost: ${obj.cost}`;
     } else {
         return "Unknown";
     }
@@ -339,9 +330,6 @@ function convertZipcodeToState(zipcode) {
 
     return st;
 }
-
-// console.log(extractLocation(obj))
-// console.log(extractDate(obj));
 
 
 
