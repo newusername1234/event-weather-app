@@ -9,7 +9,7 @@ function extractListforDateGiven() {
     return fetch(weatherAPIaddress)
     .then(r => r.json())
     .then(extractsList)
-    // .then(showMeTHing)
+    .then(showMeTHing)
 }
 
 function extractsList (obj) {
