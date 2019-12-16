@@ -5,6 +5,7 @@
 // TODO: 
 
 createButton();
+addInputEventListener();
 // creates submit button for html
 
 function createButton() {
@@ -13,6 +14,13 @@ function createButton() {
     submitButton.addEventListener("click", submitYelpCall);
     submitButton.textContent = "Submit";
     inputContainer.appendChild(submitButton);
+}
+
+function addInputEventListener() {
+    let input = document.getElementById("locationInput");
+    input.addEventListener("change", submitYelpCall);
+    // console.log("added");
+    // return input;
 }
 
 function submitYelpCall() {
