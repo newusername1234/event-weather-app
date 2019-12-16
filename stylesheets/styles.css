@@ -3,26 +3,23 @@
     box-sizing: border-box;
     font-style: bold;
     font-family: 'Rubik', sans-serif;
+    /* color: rgb(194, 73, 102); */
 }
 
-
-
-html, body {
+html{
     /* height: 100%;
     width: 100%; */
 }
 
-html {
-
-}
-
 body {
-    background-image: url(../images/scenic-view-of-mountain-range-564902.jpg) ;
+    background-image: url(../images/clouds-1431822.jpg) ;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: space-between ;
     align-items: center;
-    background-size: 100% 100%;
+    height: 100%;
+    background-attachment: fixed;
 }
 
 .nameAndDescription {

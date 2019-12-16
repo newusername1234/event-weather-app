@@ -1,8 +1,8 @@
 
 
-// const container = document.querySelector(".js-container");
+const container = document.querySelector(".js-container");
 
-// let dateGiven = "2019-12-15 12:00:00"
+let dateGiven = "2019-12-15 12:00:00"
 
 function extractListforDateGiven() {
     let userInput = document.getElementById("locationInput");

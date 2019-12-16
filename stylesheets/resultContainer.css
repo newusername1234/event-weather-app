@@ -9,11 +9,11 @@
     justify-content: flex-start;
     height: 500px;
     width: 300px;
-    border: orange 5px solid;
+    border: rgb(255, 115, 0) 5px solid;
     border-radius: 10px;
     text-align: center;
     margin: 15px;
-    box-shadow: 10px 10px 10px rgb(95, 95, 214, .5);
+    box-shadow: 10px 10px 10px rgba(94, 94, 104, 0.5);
 }
 
 .js-pictureFrame {
