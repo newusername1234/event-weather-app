@@ -17,6 +17,8 @@ function createCard(obj) {
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
     newCard.className = "js-resultCard";
+    newCard.dataAttribute = obj;
+    newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute));
     if (extractDate(obj) === date) {
         // console.log("getting current weather!!!!")
         findCurrentWeather(newCard);
@@ -27,9 +29,10 @@ function createCard(obj) {
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
-    appendTextToCard(extractDate(obj), newCard, "li"); // adds date
-    appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
-    
+    appendTextToCard(`Date: ${extractDate(obj)}`, newCard, "li"); // adds date
+    appendTextToCard(`Time: ${timeConvert(extractTime(obj))}`, newCard, "li"); // adds start time
+    appendTextToCard(`Address: ${extractLocation(obj)}`, newCard, "li"); // adds address
+    appendLinktoCard(extractLink(obj), newCard);
     // console.log(getDateString(obj));
     // console.log(date);
   
@@ -126,6 +129,14 @@ function extractTime(obj) {
     return time;
 }
 
+function timeConvert(time) {
+    let hours = time.substr(0, 2);
+    let convertedHours = hours % 12 || 12;
+    let ampm = (hours < 12 || hours == 24) ? "AM" : "PM";
+    time = convertedHours + time.substr(2, 3) + ampm;
+    return time;
+}
+
 function extractLocation(obj) {
     let objLocation = obj.location;
     let state = convertZipcodeToState(objLocation.zip_code);
@@ -158,6 +169,18 @@ function getDateString(obj) {
         date += " 24:00:00";
     }
     return date;
+}
+
+function extractLink(obj) {
+    return obj.event_site_url;
+}
+
+function appendLinktoCard(url, newCard) {
+    let link = document.createElement("a");
+    link.textContent = "Click here for more info"
+    link.href = url;
+    link.target = "_blank";
+    newCard.appendChild(link);
 }
 
 // used in extractLocation() since yelp data doesn't include state
