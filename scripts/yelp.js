@@ -27,8 +27,9 @@ function createCard(obj) {
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
-    appendTextToCard(extractDate(obj), newCard, "li"); // adds date
-    appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
+    appendTextToCard(`Date: ${extractDate(obj)}`, newCard, "li"); // adds date
+    appendTextToCard(`Time: ${timeConvert(extractTime(obj))}`, newCard, "li"); // adds start time
+    appendTextToCard(`Address: ${extractLocation(obj)}`, newCard, "li"); // adds address
     
     // console.log(getDateString(obj));
     // console.log(date);
@@ -123,6 +124,14 @@ function extractTime(obj) {
     let time = obj.time_start;
     time = time.slice(11, 19);
     // console.log(time);
+    return time;
+}
+
+function timeConvert(time) {
+    let hours = time.substr(0, 2);
+    let convertedHours = hours % 12 || 12;
+    let ampm = (hours < 12 || hours == 24) ? "AM" : "PM";
+    time = convertedHours + time.substr(2, 3) + ampm;
     return time;
 }
 
