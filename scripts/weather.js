@@ -45,8 +45,14 @@ function findCurrentWeather(newCard) {
     .then(function (obj) {
         appendTextToCard(getDescription(obj), newCard, "h3");
         appendTextToCard(String(getTemperature(obj)), newCard, "h4");
+        appendImagetoCard(getIcon(obj), newCard);
     })
         // .then(showMeTHing)
+}
+
+function getIcon(obj) {
+    let icon = "http://openweathermap.org/img/w/" + String(obj.weather[0].icon) + ".png";
+    return icon;
 }
 
 function getDescription(obj) {
