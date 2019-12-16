@@ -30,6 +30,7 @@ function findWeatherAndTempforDateGiven (dateGiven, newCard) {
             if (item.dt_txt == dateGiven) {
                 appendTextToCard(item.weather[0].description.toUpperCase(), newCard, "h3");
                 appendTextToCard(String(kToF(item.main.temp)), newCard, "h4");
+                appendImagetoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", newCard);
             }
         }
     })  
@@ -44,8 +45,14 @@ function findCurrentWeather(newCard) {
     .then(function (obj) {
         appendTextToCard(getDescription(obj).toUpperCase(), newCard, "h3");
         appendTextToCard(String(getTemperature(obj)), newCard, "h4");
+        appendImagetoCard(getIcon(obj), newCard);
     })
         // .then(showMeTHing)
+}
+
+function getIcon(obj) {
+    let icon = "http://openweathermap.org/img/w/" + String(obj.weather[0].icon) + ".png";
+    return icon;
 }
 
 function getDescription(obj) {

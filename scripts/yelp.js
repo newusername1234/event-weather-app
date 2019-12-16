@@ -29,6 +29,7 @@ function createCard(obj) {
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
     appendTextToCard(extractDate(obj), newCard, "li"); // adds date
     appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
+    
     // console.log(getDateString(obj));
     // console.log(date);
   
