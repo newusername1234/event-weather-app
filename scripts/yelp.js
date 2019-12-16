@@ -1,14 +1,14 @@
 const today = new Date();
 let currentTime = parseInt(today.getTime()/1000);
-const fiveDaysMilliSeconds = 432000;
-let endTime = currentTime + fiveDaysMilliSeconds;
+const fourDaysMilliseconds = 345600;
+let endTime = currentTime + fourDaysMilliseconds;
 // let cityName = "Pheonix";
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 function getYelpObj(newUrl) {
     // console.log(newUrl)
     fetch(newUrl)
         .then(r => r.json())
-        // .then(r => console.log(r))
+        // .then(showMeThing)
         .then(r => r.map(createCard))
 }
 
@@ -59,6 +59,11 @@ __proto__: Object,
 
 function extractImage(obj) {
     return obj["image_url"];
+}
+
+function showMeThing (obj) {
+    console.log(obj);
+    return obj;
 }
 
 function appendImagetoCard(str, newCard) {
