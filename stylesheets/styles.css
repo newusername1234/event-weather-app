@@ -1,23 +1,16 @@
 * {
-    /* border:black 1px solid; */
     box-sizing: border-box;
     font-style: bold;
     font-family: 'Rubik', sans-serif;
 }
 
-
-
 html, body {
-    height: 100%;
-    width: 100%;
-}
-
-html {
-
+  max-height: 100%;
+  max-width: 100%;
 }
 
 body {
-    background-image: url(../images/scenic-view-of-mountain-range-564902.jpg) ;
+    background-image: url(../images/blue-sky-1120094.jpg) ;
     display: flex;
     flex-direction: column;
     justify-content: space-between ;
