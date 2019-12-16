@@ -4,11 +4,14 @@
     font-style: bold;
     font-family: 'Rubik', sans-serif;
     /* color: rgb(194, 73, 102); */
+    color:  rgb(51, 49, 49);
+    
 }
 
 html{
     /* height: 100%;
     width: 100%; */
+    /* border: black 1px solid ; */
 }
 
 body {
@@ -26,50 +29,68 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .websiteName {
     color: rgb(194, 73, 102);
     display: flex;
-    /* justify-content: center; */
     font-size: 70px;
     padding-top: 20px;
-    text-shadow: 2px 2px rgb(4, 2, 2);
+    text-shadow: 2px 2px whitesmoke;
+    
 }
 
 .websiteDescription {
     display: flex;
-    /* flex-direction: column;
-    align-items: center; */
-    font-size: 30px;
-    color: rgb(139, 130, 130);
-    /* padding: 20px; */
+    font-size: 35px;
     padding-left: 100px;
     padding-right: 100px;
-    padding-top: 30px;
+    padding-top: 50px;
     align-items: center;
-    text-shadow: 2px 2px black;
+    text-shadow: 1px 1px whitesmoke;
+    color: rgb(53, 44, 44);
 }
 
 .userInput {
     padding: 30px;
-    padding-top: 50px;
-    color: rgb(139, 130, 130);
-    text-shadow: 1px 1px black;
+    padding-top: 100px;
+    padding-right: 70px;
     font-size: 25px;
+    /* text-shadow: 1px 1px whitesmoke; */
+    /* text-shadow: 0.5px 1.5px black; */
+    text-shadow: 1px 1px whitesmoke;
+
+}
+
+#locationInput {
+    border-radius: 20px;    
+}
+
+button {
+    border-radius: 20px;
 }
 
 .footerContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: right ;
-    color: rgb(82, 75, 75);
-    text-shadow: 1px 1px black;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-shadow: 0.5px 1px black;
+    font-size: 30 px;
+    padding-top: 300px;
+    padding-bottom: 35px;
+    width: 100%;
+    /* text-shadow: 0.5px 1.5px black; */
 }
 
 .partners {
     display: flex;
-    justify-content: right;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.api{
+    display: flex;
+    justify-items: right;
 }
