@@ -40,14 +40,16 @@
     margin: 0px;
     order: -1;
     font-size: 25px;
-    
+}
 
+.js-resultCard a {
+    order: 2;
 }
 
 .js-pictureFrame {
     display: flex;
     justify-content: center;
-    height: 100px;
+    max-height: 150px;
     padding: 10px;
 
 }

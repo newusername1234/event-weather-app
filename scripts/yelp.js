@@ -17,6 +17,8 @@ function createCard(obj) {
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
     newCard.className = "js-resultCard";
+    newCard.dataAttribute = obj;
+    newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute));
     if (extractDate(obj) === date) {
         // console.log("getting current weather!!!!")
         findCurrentWeather(newCard);
@@ -30,7 +32,7 @@ function createCard(obj) {
     appendTextToCard(`Date: ${extractDate(obj)}`, newCard, "li"); // adds date
     appendTextToCard(`Time: ${timeConvert(extractTime(obj))}`, newCard, "li"); // adds start time
     appendTextToCard(`Address: ${extractLocation(obj)}`, newCard, "li"); // adds address
-    
+    appendLinktoCard(extractLink(obj), newCard);
     // console.log(getDateString(obj));
     // console.log(date);
   
@@ -167,6 +169,18 @@ function getDateString(obj) {
         date += " 24:00:00";
     }
     return date;
+}
+
+function extractLink(obj) {
+    return obj.event_site_url;
+}
+
+function appendLinktoCard(url, newCard) {
+    let link = document.createElement("a");
+    link.textContent = "Click here for more info"
+    link.href = url;
+    link.target = "_blank";
+    newCard.appendChild(link);
 }
 
 // used in extractLocation() since yelp data doesn't include state
