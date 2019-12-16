@@ -35,6 +35,28 @@ function findWeatherAndTempforDateGiven (dateGiven, newCard) {
     })  
 }
 
+function findCurrentWeather(newCard) {
+    let userInput = document.getElementById("locationInput");
+    let cityName = userInput.value;
+    let weatherAPIaddress = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${weatherAPIKey}`;
+    fetch(weatherAPIaddress)
+    .then(r => r.json())
+    .then(function (obj) {
+        appendTextToCard(getDescription(obj), newCard, "h3");
+        appendTextToCard(String(getTemperature(obj)), newCard, "h4");
+    })
+        // .then(showMeTHing)
+}
+
+function getDescription(obj) {
+    let description = obj.weather[0].description;
+    return description;
+}
+
+function getTemperature(obj) {
+    return kToF(obj.main.temp);
+}
+
 // findWeatherAndTempforDateGiven(dateGiven);
 
 // function createAndAppendElement(abc) {

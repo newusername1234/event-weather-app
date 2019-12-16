@@ -5,7 +5,7 @@ let endTime = currentTime + fiveDaysMilliSeconds;
 // let cityName = "Pheonix";
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 function getYelpObj(newUrl) {
-    console.log(newUrl)
+    // console.log(newUrl)
     fetch(newUrl)
         .then(r => r.json())
         // .then(r => console.log(r))
@@ -22,7 +22,14 @@ function createCard(obj) {
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
     appendTextToCard(extractDate(obj), newCard, "li"); // adds date
     appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
-    findWeatherAndTempforDateGiven(getDateString(obj), newCard);
+    // console.log(getDateString(obj));
+    // console.log(date);
+    if (extractDate(obj) === date) {
+        // console.log("getting current weather!!!!")
+        findCurrentWeather(newCard);
+    } else {
+        findWeatherAndTempforDateGiven(getDateString(obj), newCard);
+    }
     resultContainer.appendChild(newCard);
 }
 
