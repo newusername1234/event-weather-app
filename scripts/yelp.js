@@ -17,6 +17,12 @@ function createCard(obj) {
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
     newCard.className = "js-resultCard";
+    if (extractDate(obj) === date) {
+        // console.log("getting current weather!!!!")
+        findCurrentWeather(newCard);
+    } else {
+        findWeatherAndTempforDateGiven(getDateString(obj), newCard);
+    }
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
@@ -25,12 +31,7 @@ function createCard(obj) {
     appendTextToCard(extractLocation(obj), newCard, "li"); // adds address
     // console.log(getDateString(obj));
     // console.log(date);
-    if (extractDate(obj) === date) {
-        // console.log("getting current weather!!!!")
-        findCurrentWeather(newCard);
-    } else {
-        findWeatherAndTempforDateGiven(getDateString(obj), newCard);
-    }
+  
     resultContainer.appendChild(newCard);
 }
 
@@ -94,7 +95,7 @@ function extractCost(obj) {
     if (obj.cost) {
         return `Cost: $${obj.cost}`;
     } else {
-        return "Cost: Unknown";
+        return "Cost: Free";
     }
 }
 

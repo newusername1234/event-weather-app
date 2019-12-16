@@ -28,7 +28,7 @@ function findWeatherAndTempforDateGiven (dateGiven, newCard) {
     .then(x => {
         for (let item of x) {
             if (item.dt_txt == dateGiven) {
-                appendTextToCard(item.weather[0].description, newCard, "h3");
+                appendTextToCard(item.weather[0].description.toUpperCase(), newCard, "h3");
                 appendTextToCard(String(kToF(item.main.temp)), newCard, "h4");
             }
         }
@@ -42,7 +42,7 @@ function findCurrentWeather(newCard) {
     fetch(weatherAPIaddress)
     .then(r => r.json())
     .then(function (obj) {
-        appendTextToCard(getDescription(obj), newCard, "h3");
+        appendTextToCard(getDescription(obj).toUpperCase(), newCard, "h3");
         appendTextToCard(String(getTemperature(obj)), newCard, "h4");
     })
         // .then(showMeTHing)
