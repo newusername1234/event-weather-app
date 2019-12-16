@@ -30,11 +30,26 @@ function submitYelpCall() {
     console.log("clicked")
     // console.log(cityName)
     // console.log(newUrl)
-    clearResultContainer();
+    waitingAnimation();
     getYelpObj(newUrl);
 }
 
-function clearResultContainer() {
+function clearResultContainer(obj) {
     let resultContainer = document.querySelector(".js-resultContainer");
     resultContainer.textContent = "";
+    resultContainer.style.fontSize = "";
+    resultContainer.style.padding = "";
+    resultContainer.style.textShadow = "";
+    resultContainer.style.color = "";
+    return obj;
+}
+
+function waitingAnimation() {
+    let resultContainer = document.querySelector(".js-resultContainer");
+    resultContainer.textContent = "Fetching your events. Please wait.";
+    resultContainer.style.textAlign = "center";
+    resultContainer.style.fontSize = "30px";
+    resultContainer.style.padding = "100px";
+    resultContainer.style.textShadow = "2px 2px black";
+    resultContainer.style.color =  "rgb(194, 73, 102)";
 }

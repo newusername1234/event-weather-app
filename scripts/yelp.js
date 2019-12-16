@@ -8,6 +8,7 @@ function getYelpObj(newUrl) {
     // console.log(newUrl)
     fetch(newUrl)
         .then(r => r.json())
+        .then(clearResultContainer)
         // .then(showMeThing)
         .then(r => r.map(createCard))
 }
