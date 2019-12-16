@@ -30,6 +30,7 @@ function findWeatherAndTempforDateGiven (dateGiven, newCard) {
             if (item.dt_txt == dateGiven) {
                 appendTextToCard(item.weather[0].description, newCard, "h3");
                 appendTextToCard(String(kToF(item.main.temp)), newCard, "h4");
+                appendImagetoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", newCard);
             }
         }
     })  
