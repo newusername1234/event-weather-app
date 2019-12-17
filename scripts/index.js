@@ -23,9 +23,23 @@ function addInputEventListener() {
     // return input;
 }
 
+function getCurrentTime () {
+    const today = new Date();
+    let currentTime = parseInt(today.getTime()/1000);
+    return currentTime;
+}
+
+function getEndTime(currentTime) {
+    const fourDaysMilliseconds = 345600;
+    return currentTime + fourDaysMilliseconds;
+}
+
 function submitYelpCall() {
     let userInput = document.getElementById("locationInput");
-    let cityName = userInput.value
+    let cityName = userInput.value;
+    let date = getDate();
+    let currentTime = getCurrentTime();
+    let endTime = getEndTime(currentTime);
     const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`;
     // console.log(cityName)
     // console.log(newUrl)

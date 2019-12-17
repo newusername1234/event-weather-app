@@ -1,7 +1,3 @@
-
-
-const container = document.querySelector(".js-container");
-
 function extractListforDateGiven(latitude, longitude) {
     let userInput = document.getElementById("locationInput");
     let cityName = userInput.value;

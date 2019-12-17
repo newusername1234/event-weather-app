@@ -1,8 +1,9 @@
-const today = new Date();
-let currentTime = parseInt(today.getTime()/1000);
-const fourDaysMilliseconds = 345600;
-let endTime = currentTime + fourDaysMilliseconds;
-let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
+function getDate() {
+    const today = new Date();
+    let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
+    return date;
+}
+
 function getYelpObj(newUrl) {
     fetch(newUrl)
         .then(r => r.json())
@@ -19,7 +20,7 @@ function addCardsToResultBox(array) { // adds cards, and if no results, displays
     }
 }
 
-function getCurrentTime() { // gets ISO current time
+function getCurrentTimeString() { // gets ISO current time
     let today1 = new Date();
     let hours = String(today1.getHours());
     let minutes = today1.getMinutes();
@@ -32,7 +33,7 @@ function getCurrentTime() { // gets ISO current time
 }
 
 function createCard(obj) {
-    if ((extractDate(obj) === date) && (extractTime(obj) < getCurrentTime())) { // if current time is past event start time, it doesn't create a card for event
+    if ((extractDate(obj) === getDate()) && (extractTime(obj) < getCurrentTimeString())) { // if current time is past event start time, it doesn't create a card for event
         return
     }
     let resultContainer = document.querySelector(".js-resultContainer");
@@ -116,6 +117,7 @@ function extractCost(obj) {
 }
 
 function extractDate(obj) {
+    let date = getDate();
     let objDate = obj.time_start;
     objDate = objDate.slice(0, 10);
     if (objDate < date) {
@@ -435,8 +437,3 @@ function convertZipcodeToState(zipcode) {
 
     return st;
 }
-
-
-
-
-
