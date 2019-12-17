@@ -43,6 +43,9 @@ function createCard(obj) {
     findWeatherAndTempforDateGiven(getDateString(obj), newCard);
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
+    if (extractName(obj).length > 35) {
+        newCard.children[1].style.fontSize = "20px";
+    }
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
     appendTextToCard(`Date: ${extractDate(obj)}`, newCard, "li"); // adds date
