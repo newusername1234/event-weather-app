@@ -40,7 +40,7 @@ function createCard(obj) {
     newCard.className = "js-resultCard";
     newCard.dataAttribute = [obj]; // gives ability to debug by adding data to card
     newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute)); // adds debugging ability to click on card to see data
-    findWeatherAndTempforDateGiven(getDateString(obj), newCard); // adds icon, weather description, and temp
+    findWeatherAndTempforDateGiven(getDateString(obj), extractLatitude(obj), extractLongitude(obj), newCard); // adds icon, weather description, and temp
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     if (extractName(obj).length > 35) {
@@ -120,6 +120,14 @@ function extractDate(obj) {
     } else {
         return objDate;
     }
+}
+
+function extractLatitude(obj) {
+    return obj.latitude;
+}
+
+function extractLongitude(obj) {
+    return obj.longitude;
 }
 
 function extractTime(obj) {
