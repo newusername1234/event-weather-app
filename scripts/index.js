@@ -23,15 +23,15 @@ function addInputEventListener() {
     // return input;
 }
 
-function getCurrentTime () {
+function getCurrentTime () { // gets time in seconds rather than milliseconds due to backend restrictions
     const today = new Date();
     let currentTime = parseInt(today.getTime()/1000);
     return currentTime;
 }
 
 function getEndTime(currentTime) {
-    const fourDaysMilliseconds = 345600;
-    return currentTime + fourDaysMilliseconds;
+    const fourDaysSeconds = 345600;
+    return currentTime + fourDaysSeconds;
 }
 
 function submitYelpCall() {
@@ -73,6 +73,6 @@ function waitingAnimation() {
     resultContainer.style.textAlign = "center";
     resultContainer.style.fontSize = "30px";
     resultContainer.style.padding = "100px";
-    resultContainer.style.textShadow = "2px 2px black";
+    resultContainer.style.textShadow = "2px 2px whitesmoke";
     resultContainer.style.color =  "rgb(194, 73, 102)";
 }
