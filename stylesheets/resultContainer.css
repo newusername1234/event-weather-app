@@ -17,7 +17,7 @@
     box-shadow: 10px 10px 10px rgba(94, 94, 104, 0.5);
     background-blend-mode: screen;
     overflow: auto;
-    background-image: linear-gradient(rgb(155, 232, 251),rgb(195, 209, 214));
+    background-image: linear-gradient(rgba(155, 232, 251, 0.7),rgba(195, 209, 214, 0.7));
     border-radius: 5px;
     padding: 5px;
 
