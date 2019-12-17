@@ -9,7 +9,7 @@ function extractListforDateGiven() {
     return fetch(weatherAPIaddress)
     .then(r => r.json())
     .then(extractsList)
-    .then(showMeTHing)
+    // .then(showMeTHing)
 }
 
 function extractsList (obj) {
@@ -25,27 +25,12 @@ function findWeatherAndTempforDateGiven (dateGiven, newCard) {
     .then(x => {
         for (let item of x) {
             if (item.dt_txt == dateGiven) {
-                newCard.dataAttribute.push(item)
-                appendTextToCard(item.weather[0].description.toUpperCase(), newCard, "h3");
-                appendTextToCard(String(kToF(item.main.temp)), newCard, "h4");
-                appendIcontoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", newCard);
+                newCard.dataAttribute.push(item);
+                appendTextToCard(`Temperature: ${String(kToF(item.main.temp))}°F`, newCard, "h4");
+                appendIcontoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", item.weather[0].description.toUpperCase(), newCard);
             }
         }
     })  
-}
-
-function findCurrentWeather(newCard) {
-    let userInput = document.getElementById("locationInput");
-    let cityName = userInput.value;
-    let weatherAPIaddress = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=${weatherAPIKey}`;
-    fetch(weatherAPIaddress)
-    .then(r => r.json())
-    .then(function (obj) {
-        appendTextToCard(getDescription(obj).toUpperCase(), newCard, "h3");
-        appendTextToCard(String(getTemperature(obj)), newCard, "h4");
-        appendIcontoCard(getIcon(obj), newCard);
-    })
-        // .then(showMeTHing)
 }
 
 function getIcon(obj) {
