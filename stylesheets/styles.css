@@ -26,6 +26,11 @@ body {
     background-attachment: fixed;
 }
 
+.footerContainer a {
+    text-decoration: none;
+    text-shadow: none;
+}
+
 .nameAndDescription {
     display: flex;
     flex-direction: column;
@@ -73,16 +78,28 @@ button {
     border-radius: 20px;
 }
 
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 250px;
+    padding-bottom: 35px;
+    height: 100px;
+}
 .footerContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
-    text-shadow: 0.5px 1px black;
+    align-items: center;
+    color: black;
+    text-shadow: 1px 1px whitesmoke;
     font-size: 30 px;
-    padding-top: 250px;
-    padding-bottom: 35px;
     width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-image: linear-gradient(rgba(89, 109, 114, 0.7),rgba(63, 73, 77, 0.7));
+
     /* text-shadow: 0.5px 1.5px black; */
 }
 
