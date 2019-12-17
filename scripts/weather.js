@@ -26,8 +26,7 @@ function findWeatherAndTempforDateGiven (dateGiven, latitude, longitude, newCard
         for (let item of x) {
             if (item.dt_txt == dateGiven) {
                 newCard.dataAttribute.push(item);
-                appendTextToCard(`Temperature: ${String(kToF(item.main.temp))}°F`, newCard, "h4");
-                appendIcontoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", item.weather[0].description.toUpperCase(), newCard);
+                appendIcontoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", item.weather[0].description.toUpperCase(), `Temperature: ${String(kToF(item.main.temp))}°F`, newCard);
             }
         }
     })  

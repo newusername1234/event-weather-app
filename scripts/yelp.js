@@ -78,15 +78,18 @@ function appendImagetoCard(str, newCard) {
     newCard.appendChild(pictureFrame);
 }
 
-function appendIcontoCard(str, text, newCard) {
+function appendIcontoCard(str, text, text2, newCard) {
     let pictureFrame = document.createElement("div");
     pictureFrame.className = "js-iconFrame";
     let imgEl = document.createElement("img");
     imgEl.src = str;
     let h4El = document.createElement("h4");
     h4El.textContent = text;
+    let h3El2 = document.createElement("h3");
+    h3El2.textContent = text2;
     pictureFrame.appendChild(imgEl);
     pictureFrame.appendChild(h4El);
+    pictureFrame.appendChild(h3El2);
     newCard.appendChild(pictureFrame);
 }
 
