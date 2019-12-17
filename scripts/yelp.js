@@ -11,7 +11,7 @@ function getYelpObj(newUrl) {
         .then(addCardsToResultBox)
 }
 
-function addCardsToResultBox(array) {
+function addCardsToResultBox(array) { // adds cards, and if no results, displays it
     if (array.length === 0) {
         ifNoResults();
     } else {
@@ -19,11 +19,11 @@ function addCardsToResultBox(array) {
     }
 }
 
-function getCurrentTime() {
+function getCurrentTime() { // gets ISO current time
     let today1 = new Date();
     let hours = String(today1.getHours());
     let minutes = today1.getMinutes();
-    if (minutes < 10) {
+    if (minutes < 10) { // gets format correct for ISO date
         minutes = "0" + String(minutes);
     } else {
         minutes = String(minutes);
@@ -32,19 +32,19 @@ function getCurrentTime() {
 }
 
 function createCard(obj) {
-    if ((extractDate(obj) === date) && (extractTime(obj) < getCurrentTime())) {
+    if ((extractDate(obj) === date) && (extractTime(obj) < getCurrentTime())) { // if current time is past event start time, it doesn't create a card for event
         return
     }
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
     newCard.className = "js-resultCard";
-    newCard.dataAttribute = [obj];
-    newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute));
-    findWeatherAndTempforDateGiven(getDateString(obj), newCard);
+    newCard.dataAttribute = [obj]; // gives ability to debug by adding data to card
+    newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute)); // adds debugging ability to click on card to see data
+    findWeatherAndTempforDateGiven(getDateString(obj), newCard); // adds icon, weather description, and temp
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     if (extractName(obj).length > 35) {
-        newCard.children[1].style.fontSize = "20px";
+        newCard.children[1].style.fontSize = "20px"; // Keeps h1 headers from being too big by changing the text size if over a certain character length
     }
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
     appendTextToCard(extractCost(obj), newCard, "li"); // adds cost
@@ -70,7 +70,7 @@ function appendImagetoCard(str, newCard) {
     pictureFrame.className = "js-pictureFrame";
     let imgEl = document.createElement("img");
     if (str === "") {
-        imgEl.src = "./images/no-image.jpg";
+        imgEl.src = "./images/no-image.jpg"; // adds basic filler image if no image provided
     } else {
         imgEl.src = str;
     }
@@ -107,7 +107,7 @@ function extractDescription(obj) {
 function extractCost(obj) {
     if (obj.cost) {
         return `Cost: $${obj.cost}`;
-    } else {
+    } else if (obj.is_free) { // if no cost provided, event is listed as free. Probably need to double check this against isFree in object
         return "Cost: Free";
     }
 }
