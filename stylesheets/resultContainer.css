@@ -10,13 +10,15 @@
     justify-content: flex-start;
     height: 500px;
     width: 300px;
-    border: #c25949 5px solid; 
+    border: #c25949 7px solid; 
     border-radius: 10px;
     text-align: center;
     margin: 15px;
     box-shadow: 10px 10px 10px rgba(94, 94, 104, 0.5);
     background-blend-mode: screen;
     overflow: auto;
+    background-color: rgba(191, 190, 196, 0.5);
+    border-radius: 5px;
 
     /* text-shadow: 0.5px 1px whitesmoke; */
 }
@@ -29,6 +31,7 @@
     order: -2;
     margin: 0px;
     font-size: 25px;
+    text-shadow: 1px 1px whitesmoke;
 
 }
 
@@ -40,10 +43,13 @@
     margin: 0px;
     order: -1;
     font-size: 25px;
+    text-shadow: 1px 1px whitesmoke;
 }
 
 .js-resultCard a {
     order: 2;
+    color: whitesmoke;
+    text-shadow: 1px 1px #c25949;
 }
 
 .js-pictureFrame {
@@ -69,6 +75,7 @@
 .js-resultCard h1 {
     margin: 0;
     padding: 20px, 0;
+    text-shadow: 1px 1px whitesmoke;
 }
 
 .js-resultCard p {
@@ -79,4 +86,6 @@
 .js-resultCard li {
     list-style: circle;
     text-align: center;
+    color: whitesmoke;
+    text-shadow: 1px 1px #c25949;
 }
