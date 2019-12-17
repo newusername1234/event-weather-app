@@ -27,11 +27,20 @@ function submitYelpCall() {
     let userInput = document.getElementById("locationInput");
     let cityName = userInput.value
     const newUrl = `https://yelp-events-helper.herokuapp.com/${cityName}/${yelpapiKey}/${currentTime}/${endTime}`;
-    console.log("clicked")
     // console.log(cityName)
     // console.log(newUrl)
     waitingAnimation();
     getYelpObj(newUrl);
+}
+
+function ifNoResults() {
+    let resultContainer = document.querySelector(".js-resultContainer");
+        resultContainer.textContent = "Couldn't find any results";
+        resultContainer.style.textAlign = "center";
+        resultContainer.style.fontSize = "30px";
+        resultContainer.style.padding = "100px";
+        resultContainer.style.textShadow = "2px 2px black";
+        resultContainer.style.color =  "rgb(194, 73, 102)";
 }
 
 function clearResultContainer(obj) {

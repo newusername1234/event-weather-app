@@ -10,7 +10,15 @@ function getYelpObj(newUrl) {
         .then(r => r.json())
         .then(clearResultContainer)
         // .then(showMeThing)
-        .then(r => r.map(createCard))
+        .then(addCardsToResultBox)
+}
+
+function addCardsToResultBox(array) {
+    if (array.length === 0) {
+        ifNoResults();
+    } else {
+        array.forEach(createCard);
+    }
 }
 
 function createCard(obj) {
@@ -37,6 +45,7 @@ function createCard(obj) {
     // console.log(date);
   
     resultContainer.appendChild(newCard);
+    return obj;
 }
 
 let obj = {
