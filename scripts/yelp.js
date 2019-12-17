@@ -40,7 +40,7 @@ function createCard(obj) {
     newCard.className = "js-resultCard";
     newCard.dataAttribute = [obj]; // gives ability to debug by adding data to card
     newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute)); // adds debugging ability to click on card to see data
-    findWeatherAndTempforDateGiven(getDateString(obj), newCard); // adds icon, weather description, and temp
+    findWeatherAndTempforDateGiven(getDateString(obj), extractLatitude(obj), extractLongitude(obj), newCard); // adds icon, weather description, and temp
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     if (extractName(obj).length > 35) {
@@ -78,15 +78,18 @@ function appendImagetoCard(str, newCard) {
     newCard.appendChild(pictureFrame);
 }
 
-function appendIcontoCard(str, text, newCard) {
+function appendIcontoCard(str, text, text2, newCard) {
     let pictureFrame = document.createElement("div");
     pictureFrame.className = "js-iconFrame";
     let imgEl = document.createElement("img");
     imgEl.src = str;
     let h4El = document.createElement("h4");
     h4El.textContent = text;
+    let h3El2 = document.createElement("h3");
+    h3El2.textContent = text2;
     pictureFrame.appendChild(imgEl);
     pictureFrame.appendChild(h4El);
+    pictureFrame.appendChild(h3El2);
     newCard.appendChild(pictureFrame);
 }
 
@@ -120,6 +123,14 @@ function extractDate(obj) {
     } else {
         return objDate;
     }
+}
+
+function extractLatitude(obj) {
+    return obj.latitude;
+}
+
+function extractLongitude(obj) {
+    return obj.longitude;
 }
 
 function extractTime(obj) {

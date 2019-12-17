@@ -2,10 +2,10 @@
 
 const container = document.querySelector(".js-container");
 
-function extractListforDateGiven() {
+function extractListforDateGiven(latitude, longitude) {
     let userInput = document.getElementById("locationInput");
     let cityName = userInput.value;
-    let weatherAPIaddress = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&APPID=${weatherAPIKey}`;
+    let weatherAPIaddress = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${weatherAPIKey}`;
     return fetch(weatherAPIaddress)
     .then(r => r.json())
     .then(extractsList)
@@ -20,14 +20,13 @@ function kToF (k){
    return parseInt(((k-273.15) * (9/5)) + 32);
 }
 
-function findWeatherAndTempforDateGiven (dateGiven, newCard) {
-    extractListforDateGiven()
+function findWeatherAndTempforDateGiven (dateGiven, latitude, longitude, newCard) {
+    extractListforDateGiven(latitude, longitude)
     .then(x => {
         for (let item of x) {
             if (item.dt_txt == dateGiven) {
                 newCard.dataAttribute.push(item);
-                appendTextToCard(`Temperature: ${String(kToF(item.main.temp))}°F`, newCard, "h4");
-                appendIcontoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", item.weather[0].description.toUpperCase(), newCard);
+                appendIcontoCard("http://openweathermap.org/img/w/" + String(item.weather[0].icon) + ".png", item.weather[0].description.toUpperCase(), `Temperature: ${String(kToF(item.main.temp))}°F`, newCard);
             }
         }
     })  
