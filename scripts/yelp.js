@@ -1,9 +1,10 @@
-const today = new Date();
-let currentTime = parseInt(today.getTime()/1000);
-const fourDaysMilliseconds = 345600;
-let endTime = currentTime + fourDaysMilliseconds;
-let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
-function getYelpObj(newUrl) {
+function getDate() { // gets current date in ISO format
+    const today = new Date();
+    let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
+    return date;
+}
+
+function getYelpObj(newUrl) { // does most of the work of the website. Creates cards from yelp obj
     fetch(newUrl)
         .then(r => r.json())
         .then(clearResultContainer)
@@ -19,7 +20,7 @@ function addCardsToResultBox(array) { // adds cards, and if no results, displays
     }
 }
 
-function getCurrentTime() { // gets ISO current time
+function getCurrentTimeString() { // gets ISO formatted current time
     let today1 = new Date();
     let hours = String(today1.getHours());
     let minutes = today1.getMinutes();
@@ -31,8 +32,8 @@ function getCurrentTime() { // gets ISO current time
     return hours + ":" + minutes;
 }
 
-function createCard(obj) {
-    if ((extractDate(obj) === date) && (extractTime(obj) < getCurrentTime())) { // if current time is past event start time, it doesn't create a card for event
+function createCard(obj) { // does most of the work of the website by creating cards from data
+    if ((extractDate(obj) === getDate()) && (extractTime(obj) < getCurrentTimeString())) { // if current time is past event start time, it doesn't create a card for event
         return
     }
     let resultContainer = document.querySelector(".js-resultContainer");
@@ -51,7 +52,7 @@ function createCard(obj) {
     appendTextToCard(`Date: ${extractDate(obj)}`, newCard, "li"); // adds date
     appendTextToCard(`Time: ${timeConvert(extractTime(obj))}`, newCard, "li"); // adds start time
     appendTextToCard(`Address: ${extractLocation(obj)}`, newCard, "li"); // adds address
-    appendLinktoCard(extractLink(obj), newCard);
+    appendLinktoCard(extractLink(obj), newCard); // adds more info link
     resultContainer.appendChild(newCard);
     return obj;
 }
@@ -60,14 +61,14 @@ function extractImage(obj) {
     return obj["image_url"];
 }
 
-function showMeThing (obj) {
+function showMeThing (obj) { // used for debugging fetch requests
     console.log(obj);
     return obj;
 }
 
 function appendImagetoCard(str, newCard) {
     let pictureFrame = document.createElement("div");
-    pictureFrame.className = "js-pictureFrame";
+    pictureFrame.className = "js-pictureFrame"; // used for flex sizing images
     let imgEl = document.createElement("img");
     if (str === "") {
         imgEl.src = "./images/no-image.jpg"; // adds basic filler image if no image provided
@@ -75,21 +76,6 @@ function appendImagetoCard(str, newCard) {
         imgEl.src = str;
     }
     pictureFrame.appendChild(imgEl);
-    newCard.appendChild(pictureFrame);
-}
-
-function appendIcontoCard(str, text, text2, newCard) {
-    let pictureFrame = document.createElement("div");
-    pictureFrame.className = "js-iconFrame";
-    let imgEl = document.createElement("img");
-    imgEl.src = str;
-    let h4El = document.createElement("h4");
-    h4El.textContent = text;
-    let h3El2 = document.createElement("h3");
-    h3El2.textContent = text2;
-    pictureFrame.appendChild(imgEl);
-    pictureFrame.appendChild(h4El);
-    pictureFrame.appendChild(h3El2);
     newCard.appendChild(pictureFrame);
 }
 
@@ -110,12 +96,13 @@ function extractDescription(obj) {
 function extractCost(obj) {
     if (obj.cost) {
         return `Cost: $${obj.cost}`;
-    } else if (obj.is_free) { // if no cost provided, event is listed as free. Probably need to double check this against isFree in object
+    } else if (obj.is_free) { // if no cost provided and event is free, cost is free, otherwise no cost
         return "Cost: Free";
     }
 }
 
 function extractDate(obj) {
+    let date = getDate();
     let objDate = obj.time_start;
     objDate = objDate.slice(0, 10);
     if (objDate < date) {
@@ -139,7 +126,7 @@ function extractTime(obj) {
     return time;
 }
 
-function extractTimeForWeather(obj) {
+function extractTimeForWeather(obj) { // used slightly differently than extractTime due to UTC time requirements of openweather API (converts yelp time to utc time)
     let objTime = obj.time_start;
     let unconvertedTime = objTime.slice(11, 19);
     let timeConverted = parseInt(objTime.slice(19, 22));
@@ -148,7 +135,7 @@ function extractTimeForWeather(obj) {
     return String(unconvertedTimeNum) + objTime.slice(13,19);
 }
 
-function timeConvert(time) {
+function timeConvert(time) { // used to format time strings for display
     let hours = time.substr(0, 2);
     let convertedHours = hours % 12 || 12;
     let ampm = (hours < 12 || hours == 24) ? "AM" : "PM";
@@ -158,7 +145,7 @@ function timeConvert(time) {
 
 function extractLocation(obj) {
     let objLocation = obj.location;
-    let state = convertZipcodeToState(objLocation.zip_code);
+    let state = convertZipcodeToState(objLocation.zip_code); // no states are provided in yelp data
     let line1 = objLocation.address1;
     let line2 = `${objLocation.city}, ${state} ${objLocation.zip_code}`
     let location = `${line1}
@@ -166,18 +153,18 @@ ${line2}`
     return location;
 }
 
-function getDateString(obj) {
+function getDateString(obj) { // used to convert dates and times from yelp start time data to something that matches openweather API datetimes (every three hours and UTC)
     let date = extractDate(obj);
     let hours = extractTimeForWeather(obj);
-    if (hours > "21:00:00") {
-        if (hours < "24:00:00") {
+    if (hours > "21:00:00") { // anything after 21:00:00 is converted to the next day's 00:00:00 weather forecast per below
+        if (hours < "24:00:00") { // catches anything between 21:00:00 and 24:00:00 to make it 00:00:00 for next day
             hours = "24:00:00";
         }
-        date = addDays(date, 1).toISOString().slice(0,10);
+        date = addDays(date, 1).toISOString().slice(0,10); // adds one day to the date and converts it to usable format
         let hoursNum = parseInt(hours.slice(0,3));
-        hoursNum = hoursNum % 24;
-        hours = "0" + String(hoursNum) + hours.slice(2);
-    }
+        hoursNum = hoursNum % 24; // converts utc times that are greater than 24:00:00 
+        hours = "0" + String(hoursNum) + hours.slice(2); // brings it all back together into usable format
+    } // below converts everything in between 3 hour time segments to the next 3 hour time segment
     if (hours <= "03:00:00") {
         date += " 03:00:00";
     } else if (hours <= "06:00:00") {
@@ -198,7 +185,7 @@ function getDateString(obj) {
 
 function addDays(date, days) {
     let result = new Date(date);
-    result.setDate(result.getDate() + days);
+    result.setDate(result.getDate() + days); // changes the day of the month by however many days it needs to be modified
     return result;
 }
 
@@ -214,8 +201,8 @@ function appendLinktoCard(url, newCard) {
     newCard.appendChild(link);
 }
 
-// used in extractLocation() since yelp data doesn't include state
-function convertZipcodeToState(zipcode) {
+
+function convertZipcodeToState(zipcode) { // used in extractLocation() since yelp data doesn't include state
     // copied from https://stackoverflow.com/questions/28821804/how-can-i-quickly-determine-the-state-for-a-given-zipcode
     const thiszip = parseInt(zipcode, 10);
     let st;
@@ -435,8 +422,3 @@ function convertZipcodeToState(zipcode) {
 
     return st;
 }
-
-
-
-
-
