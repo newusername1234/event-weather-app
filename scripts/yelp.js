@@ -75,12 +75,15 @@ function appendImagetoCard(str, newCard) {
     newCard.appendChild(pictureFrame);
 }
 
-function appendIcontoCard(str, newCard) {
+function appendIcontoCard(str, text, newCard) {
     let pictureFrame = document.createElement("div");
     pictureFrame.className = "js-iconFrame";
     let imgEl = document.createElement("img");
     imgEl.src = str;
+    let h4El = document.createElement("h4");
+    h4El.textContent = text;
     pictureFrame.appendChild(imgEl);
+    pictureFrame.appendChild(h4El);
     newCard.appendChild(pictureFrame);
 }
 
@@ -119,7 +122,6 @@ function extractDate(obj) {
 function extractTime(obj) {
     let time = obj.time_start;
     time = time.slice(11, 19);
-    // console.log(time);
     return time;
 }
 
@@ -177,7 +179,6 @@ function getDateString(obj) {
     } else if (hours <= "21:00:00") {
         date += " 21:00:00";
     }
-    console.log(date);
     return date;
 }
 

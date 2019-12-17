@@ -37,12 +37,15 @@
 
 .js-resultCard p {
     order: 1;
+    flex-basis: auto;
+    min-width: 0;
+    flex-shrink: 2;
 }
 
 .js-resultCard h4 {
     margin: 0px;
     order: -1;
-    font-size: 25px;
+    font-size: 20px;
     text-shadow: 1px 1px whitesmoke;
 }
 
@@ -57,7 +60,6 @@
     justify-content: center;
     max-height: 150px;
     padding: 10px;
-
 }
 
 .js-pictureFrame > img {
@@ -65,6 +67,10 @@
 }
 
 .js-iconFrame {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
     order: -3;
 }
 
@@ -76,6 +82,9 @@
     margin: 0;
     padding: 20px, 0;
     text-shadow: 1px 1px whitesmoke;
+    flex-basis: auto;
+    min-width: 0;
+    flex-shrink: 2;
 }
 
 .js-resultCard p {
