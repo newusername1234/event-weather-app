@@ -66,7 +66,11 @@ function appendImagetoCard(str, newCard) {
     let pictureFrame = document.createElement("div");
     pictureFrame.className = "js-pictureFrame";
     let imgEl = document.createElement("img");
-    imgEl.src = str;
+    if (str === "") {
+        imgEl.src = "./images/no-image.jpg";
+    } else {
+        imgEl.src = str;
+    }
     pictureFrame.appendChild(imgEl);
     newCard.appendChild(pictureFrame);
 }
