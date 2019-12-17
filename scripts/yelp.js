@@ -2,10 +2,8 @@ const today = new Date();
 let currentTime = parseInt(today.getTime()/1000);
 const fourDaysMilliseconds = 345600;
 let endTime = currentTime + fourDaysMilliseconds;
-// let cityName = "Pheonix";
 let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
 function getYelpObj(newUrl) {
-    // console.log(newUrl)
     fetch(newUrl)
         .then(r => r.json())
         .then(clearResultContainer)
@@ -21,18 +19,28 @@ function addCardsToResultBox(array) {
     }
 }
 
+function getCurrentTime() {
+    let today1 = new Date();
+    let hours = String(today1.getHours());
+    let minutes = today1.getMinutes();
+    if (minutes < 10) {
+        minutes = "0" + String(minutes);
+    } else {
+        minutes = String(minutes);
+    }
+    return hours + ":" + minutes;
+}
+
 function createCard(obj) {
+    if ((extractDate(obj) === date) && (extractTime(obj) < getCurrentTime())) {
+        return
+    }
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
     newCard.className = "js-resultCard";
-    newCard.dataAttribute = obj;
+    newCard.dataAttribute = [obj];
     newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute));
-    if (extractDate(obj) === date) {
-        // console.log("getting current weather!!!!")
-        findCurrentWeather(newCard);
-    } else {
-        findWeatherAndTempforDateGiven(getDateString(obj), newCard);
-    }
+    findWeatherAndTempforDateGiven(getDateString(obj), newCard);
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description
@@ -41,35 +49,8 @@ function createCard(obj) {
     appendTextToCard(`Time: ${timeConvert(extractTime(obj))}`, newCard, "li"); // adds start time
     appendTextToCard(`Address: ${extractLocation(obj)}`, newCard, "li"); // adds address
     appendLinktoCard(extractLink(obj), newCard);
-    // console.log(getDateString(obj));
-    // console.log(date);
-  
     resultContainer.appendChild(newCard);
     return obj;
-}
-
-let obj = {
-attending_count: 96,
-business_id: "twelve-eighty-atlanta-2",
-category: "nightlife",
-cost: null,
-cost_max: null,
-description: "Dodge the heat and cool off at this season's swanky Yelp soiree at Table 1280! ↵↵This is a party open to all yelpers, so RSVP now for A Midsummer Night's...",
-event_site_url: "https://www.yelp.com/events/atlanta-a-midsummer-nights-yelp-party?adjust_creative=5p_ZUsIFmlTGsyt9YVdOsg&utm_campaign=yelp_api_v3&utm_medium=api_v3_event_search&utm_source=5p_ZUsIFmlTGsyt9YVdOsg",
-id: "atlanta-a-midsummer-nights-yelp-party",
-image_url: "https://s3-media4.fl.yelpcdn.com/ephoto/GngwFJBooOrJDVKz6UEsSg/o.jpg",
-interested_count: 21,
-is_canceled: false,
-is_free: true,
-is_official: false,
-latitude: 33.789483,
-location: {address1: "1280 Peachtree St NE", address2: "", address3: "", city: "Atlanta", zip_code: "30309"},
-longitude: -84.385685,
-name: "A Midsummer Night's Yelp Party!",
-tickets_url: "",
-time_end: "2008-07-17T21:30:00-04:00",
-time_start: "2008-07-17T19:30:00-04:00",
-__proto__: Object,
 }
 
 function extractImage(obj) {
@@ -138,6 +119,15 @@ function extractTime(obj) {
     return time;
 }
 
+function extractTimeForWeather(obj) {
+    let objTime = obj.time_start;
+    let unconvertedTime = objTime.slice(11, 19);
+    let timeConverted = parseInt(objTime.slice(19, 22));
+    let unconvertedTimeNum = parseInt(unconvertedTime.slice(0,2));
+    unconvertedTimeNum = unconvertedTimeNum - timeConverted;
+    return String(unconvertedTimeNum) + objTime.slice(13,19);
+}
+
 function timeConvert(time) {
     let hours = time.substr(0, 2);
     let convertedHours = hours % 12 || 12;
@@ -158,26 +148,39 @@ ${line2}`
 
 function getDateString(obj) {
     let date = extractDate(obj);
-    let hours = extractTime(obj)
-    // console.log(hours);
-    if (hours < "03:00:00") {
-        date += " 03:00:00";
-    } else if (hours < "06:00:00") {
-        date += " 06:00:00";
-    } else if (hours < "09:00:00") {
-        date += " 09:00:00";
-    } else if (hours < "12:00:00") {
-        date += " 12:00:00";
-    } else if (hours < "15:00:00") {
-        date += " 15:00:00";
-    } else if (hours < "18:00:00") {
-        date += " 18:00:00";
-    } else if (hours < "21:00:00") {
-        date += " 21:00:00";
-    } else if (hours < "24:00:00") {
-        date += " 24:00:00";
+    let hours = extractTimeForWeather(obj);
+    if (hours > "21:00:00") {
+        if (hours < "24:00:00") {
+            hours = "24:00:00";
+        }
+        date = addDays(date, 1).toISOString().slice(0,10);
+        let hoursNum = parseInt(hours.slice(0,3));
+        hoursNum = hoursNum % 24;
+        hours = "0" + String(hoursNum) + hours.slice(2);
     }
+    if (hours <= "03:00:00") {
+        date += " 03:00:00";
+    } else if (hours <= "06:00:00") {
+        date += " 06:00:00";
+    } else if (hours <= "09:00:00") {
+        date += " 09:00:00";
+    } else if (hours <= "12:00:00") {
+        date += " 12:00:00";
+    } else if (hours <= "15:00:00") {
+        date += " 15:00:00";
+    } else if (hours <= "18:00:00") {
+        date += " 18:00:00";
+    } else if (hours <= "21:00:00") {
+        date += " 21:00:00";
+    }
+    console.log(date);
     return date;
+}
+
+function addDays(date, days) {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
 }
 
 function extractLink(obj) {
