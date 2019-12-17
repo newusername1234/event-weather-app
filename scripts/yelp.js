@@ -7,8 +7,16 @@ function getYelpObj(newUrl) {
     fetch(newUrl)
         .then(r => r.json())
         .then(clearResultContainer)
-        .then(showMeThing)
-        .then(r => r.map(createCard))
+        // .then(showMeThing)
+        .then(addCardsToResultBox)
+}
+
+function addCardsToResultBox(array) {
+    if (array.length === 0) {
+        ifNoResults();
+    } else {
+        array.forEach(createCard);
+    }
 }
 
 function getCurrentTime() {
@@ -42,6 +50,7 @@ function createCard(obj) {
     appendTextToCard(`Address: ${extractLocation(obj)}`, newCard, "li"); // adds address
     appendLinktoCard(extractLink(obj), newCard);
     resultContainer.appendChild(newCard);
+    return obj;
 }
 
 function extractImage(obj) {
