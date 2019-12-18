@@ -20,7 +20,7 @@ function findWeatherAndTempforDateGiven (dateGiven, latitude, longitude, newCard
     .then(x => {
         for (let item of x) {
             if (item.dt_txt == dateGiven) { // checks for yelp event date and time to match one of the 40 weather objects date and time
-                newCard.dataAttribute.push(item); // adds data to resultCard dataAttribute for debugging
+                // newCard.dataAttribute.push(item); // adds data to resultCard dataAttribute for debugging
                 appendWeathertoCard(getIcon(item), getDescription(item), getTemperatureString(getTemperature(item)), newCard);
             }
         }

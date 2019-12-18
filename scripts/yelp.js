@@ -39,9 +39,8 @@ function createCard(obj) { // does most of the work of the website by creating c
     let resultContainer = document.querySelector(".js-resultContainer");
     let newCard = document.createElement('div');
     newCard.className = "js-resultCard";
-    newCard.dataAttribute = [obj]; // gives ability to debug by adding data to card
-    newCard.addEventListener("click", r => console.log(r.currentTarget.dataAttribute)); // adds debugging ability to click on card to see data
-    findWeatherAndTempforDateGiven(getDateString(obj), extractLatitude(obj), extractLongitude(obj), newCard); // adds icon, weather description, and temp
+    // newCard.dataAttribute = [obj]; // gives ability to debug by adding data to card
+    // findWeatherAndTempforDateGiven(getDateString(obj), extractLatitude(obj), extractLongitude(obj), newCard); // adds icon, weather description, and temp
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
     if (extractName(obj).length > 30) {

@@ -3,7 +3,10 @@
 ## Screenshots:
 
 ![Screenshot without results-large](images/screenshot-large.png)
+<<<<<<< HEAD
+=======
 
+>>>>>>> 643a7fdb22671e984033079686c35a166e2691c0
 ![Screenshot with results-large](images/screenshot-large-with-results.png)
 
 ## What problem our app solves?
