@@ -29,6 +29,7 @@ body {
 .footerContainer a {
     text-decoration: none;
     text-shadow: none;
+
 }
 
 .nameAndDescription {
@@ -98,8 +99,8 @@ footer {
     padding-top: 5px;
     padding-bottom: 5px;
     background-image: linear-gradient(rgba(89, 109, 114, 0.7),rgba(63, 73, 77, 0.7));
-
-    /* text-shadow: 0.5px 1.5px black; */
+    position:relative;
+    bottom: 0%;
 }
 
 .partners {
