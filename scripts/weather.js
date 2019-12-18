@@ -1,6 +1,6 @@
 function extractListforLocation(latitude, longitude) { // gets the weather data and returns an array of 40 weather objects
     let userInput = document.getElementById("locationInput");
-    let weatherAPIaddress = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${weatherAPIKey}`; // fixes typo issues of user input by checking for exact lat and long of yelp event location
+    let weatherAPIaddress = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&APPID=${weatherAPIKey}`; // fixes typo issues of user input by checking for exact lat and long of yelp event location
     return fetch(weatherAPIaddress)
     .then(r => r.json())
     .then(extractsList)
