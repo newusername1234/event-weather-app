@@ -44,7 +44,7 @@ function createCard(obj) { // does most of the work of the website by creating c
     findWeatherAndTempforDateGiven(getDateString(obj), extractLatitude(obj), extractLongitude(obj), newCard); // adds icon, weather description, and temp
     appendImagetoCard(extractImage(obj), newCard); // adds image
     appendTextToCard(extractName(obj), newCard, "h1"); // adds ID
-    if (extractName(obj).length > 35) {
+    if (extractName(obj).length > 30) {
         newCard.children[1].style.fontSize = "20px"; // Keeps h1 headers from being too big by changing the text size if over a certain character length
     }
     appendTextToCard(extractDescription(obj), newCard, "p"); // adds description

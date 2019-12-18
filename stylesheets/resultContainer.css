@@ -42,6 +42,7 @@
     flex-basis: auto;
     min-width: 0;
     flex-shrink: 2;
+    overflow-wrap: break-word;
 }
 
 .js-resultCard h4 {
