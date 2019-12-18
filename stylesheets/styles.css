@@ -10,19 +10,20 @@
 }
 
 html{
-    /* height: 100%;
-    width: 100%; */
+    /* height: 100%;  */
+    /* width: 100%;  */
     /* border: black 1px solid ; */
 }
 
 body {
+    min-height: 100vh;
+    height:100%;
     background-image: url(../images/clouds-1431822.jpg) ;
     background-size: cover;
     display: flex;
     flex-direction: column;
-    justify-content: space-between ;
+    justify-content: space-between;
     align-items: center;
-    height: 100%;
     background-attachment: fixed;
 }
 
@@ -84,7 +85,6 @@ footer {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-top: 250px;
     height: 100px;
 }
 .footerContainer {
@@ -96,8 +96,8 @@ footer {
     text-shadow: 1px 1px whitesmoke;
     font-size: 30 px;
     width: 100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
     background-image: linear-gradient(rgba(89, 109, 114, 0.7),rgba(63, 73, 77, 0.7));
     position:relative;
     bottom: 0%;
