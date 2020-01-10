@@ -1,6 +1,7 @@
 function getDate() { // gets current date in ISO format
     const today = new Date();
-    let date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //add one to getMonth because it pulls months 0-11
+    const month = ((today.getMonth() + 1) < 10) ? ("0" + (today.getMonth() + 1)) : (today.getMonth() + 1); //add one to getMonth because it pulls months 0-11 and checks if number less than 10 to add a leading zero
+    const date = today.getFullYear() + "-" + month + "-" + today.getDate(); 
     return date;
 }
 
